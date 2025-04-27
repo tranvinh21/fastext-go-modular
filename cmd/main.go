@@ -6,13 +6,15 @@ import (
 	"go.uber.org/fx"
 )
 
+// close DB connection when program is closed
+
 func main() {
 	fx.New(
 		di.Module,
 		fx.Invoke(func(
 			httpServer *webServer.HttpServer,
 		) {
-			httpServer.StartServer()
-		}),
+		},
+		),
 	).Run()
 }

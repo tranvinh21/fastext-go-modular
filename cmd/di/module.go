@@ -32,7 +32,7 @@ var Handlers = fx.Options(
 
 var Module = fx.Options(
 	fx.Provide(
-		db.NewPostgresDB,
+		db.NewPostgresDBwFX,
 		router.NewRouter,
 		webServer.NewHttpServer,
 	),
