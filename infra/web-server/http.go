@@ -16,9 +16,9 @@ type HttpServer struct {
 	app *fiber.App
 }
 
-func NewHttpServer(lc fx.Lifecycle, userHandler *handler.UserHandler, messageHandler *handler.MessageHandler) *HttpServer {
+func NewHttpServer(lc fx.Lifecycle, userHandler *handler.UserHandler, messageHandler *handler.MessageHandler, authHandler *handler.AuthHandler) *HttpServer {
 	app := fiber.New()
-	router := router.NewRouter(app, userHandler, messageHandler)
+	router := router.NewRouter(app, userHandler, messageHandler, authHandler)
 	router.RegisterRoutes()
 
 	lc.Append(fx.Hook{

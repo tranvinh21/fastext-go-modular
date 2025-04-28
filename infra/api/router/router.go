@@ -9,26 +9,28 @@ type Router struct {
 	app            *fiber.App
 	userHandler    *handler.UserHandler
 	messageHandler *handler.MessageHandler
+	authHandler    *handler.AuthHandler
 }
 
-func NewRouter(app *fiber.App, userHandler *handler.UserHandler, messageHandler *handler.MessageHandler) *Router {
+func NewRouter(app *fiber.App, userHandler *handler.UserHandler, messageHandler *handler.MessageHandler, authHandler *handler.AuthHandler) *Router {
 	return &Router{
 		app:            app,
 		userHandler:    userHandler,
 		messageHandler: messageHandler,
+		authHandler:    authHandler,
 	}
 }
 
 func (r *Router) RegisterRoutes() {
 	// Health check endpoint
 	r.app.Get("/health", func(c *fiber.Ctx) error {
-		return c.SendString("OK")
+		return c.SendString("sOK")
 	})
 
-	// API v1 group
-	v1 := r.app.Group("/api/v1")
+	apiRoutes := r.app.Group("/api")
 
 	// User routes
-	RegisterUserRoutes(v1, r.userHandler)
-	RegisterMessageRoutes(v1, r.messageHandler)
+	RegisterUserRoutes(apiRoutes, r.userHandler)
+	RegisterMessageRoutes(apiRoutes, r.messageHandler)
+	RegisterAuthRoutes(apiRoutes, r.authHandler)
 }

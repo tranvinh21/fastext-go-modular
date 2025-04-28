@@ -20,6 +20,7 @@ var Usecases = fx.Options(
 	fx.Provide(
 		usecase.NewUserUsecase,
 		usecase.NewMessageUsecase,
+		usecase.NewAuthUsecase,
 	),
 )
 
@@ -27,6 +28,7 @@ var Handlers = fx.Options(
 	fx.Provide(
 		handler.NewUserHandler,
 		handler.NewMessageHandler,
+		handler.NewAuthHandler,
 	),
 )
 

@@ -41,3 +41,11 @@ func (r *UserRepository) Update(user *entity.User) error {
 func (r *UserRepository) Delete(user *entity.User) error {
 	return r.db.DB.Delete(user).Error
 }
+
+func (r *UserRepository) FindByUsername(username string) (*entity.User, error) {
+	var user entity.User
+	if err := r.db.DB.Where("name = ?", username).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
+}

@@ -10,4 +10,5 @@ type UserRepositoryImpl interface {
 	FindByEmail(email string) (*entity.User, error)
 	Update(user *entity.User) error
 	Delete(user *entity.User) error
+	FindByUsername(username string) (*entity.User, error)
 }
